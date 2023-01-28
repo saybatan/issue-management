@@ -1,4 +1,4 @@
-package com.saybatan.issuemanagement.repo;
+package com.saybatan.issuemanagement.repository;
 
 import com.saybatan.issuemanagement.entity.IssueHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
