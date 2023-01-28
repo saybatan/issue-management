@@ -1,14 +1,16 @@
 package com.saybatan.issuemanagement.service;
 
+import com.saybatan.issuemanagement.dto.IssueDTO;
 import com.saybatan.issuemanagement.entity.Issue;
+import com.saybatan.issuemanagement.util.TPage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface IssueService {
 
-    Issue save(Issue issue);
-    Issue getById(Long id);
-    Page<Issue> getAllPageable(Pageable pageable);
-    Boolean delete(Issue issue);
+    IssueDTO save(IssueDTO issueDTO);
+    IssueDTO getById(Long id);
+    TPage<IssueDTO> getAllPageable(Pageable pageable);
+    Boolean delete(IssueDTO IssueDTO);
 
 }
