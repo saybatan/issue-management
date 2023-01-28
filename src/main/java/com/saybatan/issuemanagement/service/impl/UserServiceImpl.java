@@ -5,7 +5,9 @@ import com.saybatan.issuemanagement.repository.UserRepository;
 import com.saybatan.issuemanagement.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;

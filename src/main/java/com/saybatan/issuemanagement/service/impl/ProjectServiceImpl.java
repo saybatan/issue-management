@@ -5,7 +5,9 @@ import com.saybatan.issuemanagement.repository.ProjectRepository;
 import com.saybatan.issuemanagement.service.ProjectService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
