@@ -1,9 +1,11 @@
 package com.saybatan.issuemanagement.dto;
 
 import com.saybatan.issuemanagement.entity.IssueStatus;
+import lombok.Data;
 
 import java.util.Date;
 
+@Data
 public class IssueDTO {
 
     private Long id;
