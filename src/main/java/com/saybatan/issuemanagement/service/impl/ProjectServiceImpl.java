@@ -44,34 +44,4 @@ public class ProjectServiceImpl implements ProjectService {
         return null;
     }
 
-//    @Override
-//    public Project save(Project project) {
-//
-//        if(project.getProjectCode() == null){
-//            throw new IllegalArgumentException("Project code can not be null");
-//        }
-//
-//        return projectRepository.save(project);
-//    }
-//
-//    @Override
-//    public Project getById(Long id) {
-//        return projectRepository.getById(id);
-//    }
-//
-//    @Override
-//    public Project getByProjectCode(String projectCode) {
-//        return projectRepository.getByProjectCode(projectCode);
-//    }
-//
-//    @Override
-//    public Page<Project> getAllPageable(Pageable pageable) {
-//        return projectRepository.findAll(pageable);
-//    }
-//
-//    @Override
-//    public Boolean delete(Project project) {
-//        projectRepository.delete(project);
-//        return true;
-//    }
 }
