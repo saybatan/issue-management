@@ -1,6 +1,7 @@
 package com.saybatan.issuemanagement.service.impl;
 
 import com.saybatan.issuemanagement.dto.ProjectDTO;
+import com.saybatan.issuemanagement.entity.Project;
 import com.saybatan.issuemanagement.repository.ProjectRepository;
 import com.saybatan.issuemanagement.service.ProjectService;
 import org.modelmapper.ModelMapper;
@@ -26,7 +27,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDTO getById(Long id) {
-        return null;
+        Project project = projectRepository.getOne(id);
+        return modelMapper.map(project, ProjectDTO.class);
     }
 
     @Override
