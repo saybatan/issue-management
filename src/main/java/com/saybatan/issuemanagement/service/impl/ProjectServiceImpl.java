@@ -22,7 +22,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectDTO save(ProjectDTO projectDTO) {
-        return null;
+        Project projectCode = projectRepository.getByProjectCode(projectDTO.getProjectCode());
+        if (projectCode != null) {
+            throw new IllegalArgumentException("Project Code Already Exist");
+        }
+        Project project = modelMapper.map(projectDTO, Project.class);
+        project = projectRepository.save(project);
+        projectDTO.setId(project.getId());
+        return projectDTO;
     }
 
     @Override
