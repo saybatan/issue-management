@@ -8,9 +8,17 @@ import org.springframework.data.domain.Pageable;
 public interface ProjectService {
 
     ProjectDTO save(ProjectDTO projectDTO);
+
     ProjectDTO getById(Long id);
+
     ProjectDTO getByProjectCode(String projectCode);
+
     Page<ProjectDTO> getAllPageable(Pageable pageable);
+
     Boolean delete(ProjectDTO projectDTO);
+
+    ProjectDTO update(Long id, ProjectDTO projectDTO);
+
+    void checkProjectCode(ProjectDTO projectDTO);
 
 }
