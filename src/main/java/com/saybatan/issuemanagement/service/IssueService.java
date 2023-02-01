@@ -9,8 +9,13 @@ import org.springframework.data.domain.Pageable;
 public interface IssueService {
 
     IssueDTO save(IssueDTO issueDTO);
+
     IssueDTO getById(Long id);
+
     TPage<IssueDTO> getAllPageable(Pageable pageable);
+
     Boolean delete(IssueDTO IssueDTO);
+
+    IssueDTO update(Long id, IssueDTO issueDTO);
 
 }

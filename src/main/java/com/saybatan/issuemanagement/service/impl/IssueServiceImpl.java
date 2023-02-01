@@ -30,13 +30,13 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public IssueDTO save(IssueDTO issueDTO) {
 
-        if (issueDTO.getDate() == null){
+        if (issueDTO.getDate() == null) {
             throw new IllegalArgumentException("Issue date can not be null");
         }
 
         Issue issue = modelMapper.map(issueDTO, Issue.class);
         issueRepository.save(issue);
-        return modelMapper.map(issue,IssueDTO.class);
+        return modelMapper.map(issue, IssueDTO.class);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class IssueServiceImpl implements IssueService {
         Page<Issue> issues = issueRepository.findAll(pageable);
         TPage tPage = new TPage<IssueDTO>();
         IssueDTO[] dtos = modelMapper.map(issues.getContent(), IssueDTO[].class);
-        tPage.setStat(issues,Arrays.asList(dtos));
+        tPage.setStat(issues, Arrays.asList(dtos));
 
         return tPage;
     }
@@ -58,5 +58,15 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public Boolean delete(IssueDTO IssueDTO) {
         return null;
+    }
+
+    @Override
+    public IssueDTO update(Long id, IssueDTO issueDTO) {
+        return null;
+    }
+
+    public Boolean deleteById(Long id){
+        issueRepository.deleteById(id);
+        return true;
     }
 }
