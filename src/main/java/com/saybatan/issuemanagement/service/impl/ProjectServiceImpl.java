@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
@@ -50,6 +52,11 @@ public class ProjectServiceImpl implements ProjectService {
         return null;
     }
 
+    public Boolean deleteById(Long id){
+        projectRepository.deleteById(id);
+        return true;
+    }
+
     @Override
     public ProjectDTO update(Long id, ProjectDTO projectDTO) {
 
@@ -57,12 +64,18 @@ public class ProjectServiceImpl implements ProjectService {
         if (project == null) {
             throw new IllegalArgumentException("Project Does Not Exist. ID: " + id);
         }
-        checkProjectCode(projectDTO);
+//        checkProjectCode(projectDTO);
+        Project projectCheck = projectRepository.getByProjectCodeAndIdNot(projectDTO.getProjectCode(),id);
+        if (projectCheck != null){
+            throw new IllegalArgumentException("Project Code Already Exist");
+        }
         project.setProjectCode(projectDTO.getProjectCode());
         project.setProjectName(projectDTO.getProjectName());
         projectRepository.save(project);
         return modelMapper.map(project, ProjectDTO.class);
     }
+
+//    public Boolean deleteProject
 
     @Override
     public void checkProjectCode(ProjectDTO projectDTO) {

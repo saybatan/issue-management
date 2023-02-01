@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
@@ -29,6 +31,11 @@ public class ProjectController {
     @PutMapping("/{id}")
     public ResponseEntity<ProjectDTO> updateProject(@PathVariable("id") Long id, @Validated @RequestBody ProjectDTO projectDTO) {
         return ResponseEntity.ok(projectServiceImpl.update(id, projectDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteProject(@PathVariable("id") Long id){
+        return ResponseEntity.ok(projectServiceImpl.deleteById(id));
     }
 
 
