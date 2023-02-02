@@ -3,6 +3,7 @@ package com.saybatan.issuemanagement.api;
 
 import com.saybatan.issuemanagement.dto.ProjectDTO;
 import com.saybatan.issuemanagement.service.impl.ProjectServiceImpl;
+import com.saybatan.issuemanagement.util.ApiPaths;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping(ApiPaths.ProjectCtrl.CTRL)
 public class ProjectController {
     private final ProjectServiceImpl projectServiceImpl;
 

@@ -2,13 +2,14 @@ package com.saybatan.issuemanagement.api;
 
 import com.saybatan.issuemanagement.dto.IssueDTO;
 import com.saybatan.issuemanagement.service.impl.IssueServiceImpl;
+import com.saybatan.issuemanagement.util.ApiPaths;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/issue")
+@RequestMapping(ApiPaths.IssueCtrl.CTRL)
 public class IssueController {
 
     private final IssueServiceImpl issueService;
