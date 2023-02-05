@@ -4,12 +4,13 @@ import com.saybatan.issuemanagement.dto.ProjectDTO;
 import com.saybatan.issuemanagement.entity.Project;
 import com.saybatan.issuemanagement.repository.ProjectRepository;
 import com.saybatan.issuemanagement.service.ProjectService;
+import com.saybatan.issuemanagement.util.TPage;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Arrays;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -43,8 +44,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Page<ProjectDTO> getAllPageable(Pageable pageable) {
-        return null;
+    public TPage<ProjectDTO> getAllPageable(Pageable pageable) {
+        Page<Project> projects = projectRepository.findAll(pageable);
+        TPage<ProjectDTO> tPage = new TPage<>();
+        tPage.setStat(projects, Arrays.asList(modelMapper.map(projects.getContent(),ProjectDTO[].class)));
+        return tPage;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.saybatan.issuemanagement.service;
 
 import com.saybatan.issuemanagement.dto.ProjectDTO;
-import com.saybatan.issuemanagement.entity.Project;
-import org.springframework.data.domain.Page;
+import com.saybatan.issuemanagement.util.TPage;
 import org.springframework.data.domain.Pageable;
 
 public interface ProjectService {
@@ -13,7 +12,7 @@ public interface ProjectService {
 
     ProjectDTO getByProjectCode(String projectCode);
 
-    Page<ProjectDTO> getAllPageable(Pageable pageable);
+    TPage<ProjectDTO> getAllPageable(Pageable pageable);
 
     Boolean delete(ProjectDTO projectDTO);
 
