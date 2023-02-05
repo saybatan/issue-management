@@ -1,5 +1,6 @@
 package com.saybatan.issuemanagement.advice;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,10 +13,12 @@ import java.util.Date;
 
 @ControllerAdvice
 @RestController
+@Slf4j
 public class IMExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<?> handleExceptions(Exception e, WebRequest request) {
+        log.error("ControllerAdvice -> ExceptionHandler -> ",e,request);
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), e.getMessage());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.EXPECTATION_FAILED);
     }

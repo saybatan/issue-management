@@ -4,8 +4,11 @@ package com.saybatan.issuemanagement.api;
 import com.saybatan.issuemanagement.dto.ProjectDTO;
 import com.saybatan.issuemanagement.service.impl.ProjectServiceImpl;
 import com.saybatan.issuemanagement.util.ApiPaths;
+import com.saybatan.issuemanagement.util.TPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(ApiPaths.ProjectCtrl.CTRL)
 @Api(value = ApiPaths.ProjectCtrl.CTRL)
+@Slf4j
 public class ProjectController {
     private final ProjectServiceImpl projectServiceImpl;
 
@@ -23,7 +27,15 @@ public class ProjectController {
     @GetMapping("/{id}")
     @ApiOperation(value = "Get By ID Operation", response = ProjectDTO.class)
     public ResponseEntity<ProjectDTO> getById(@PathVariable("id") Long id) {
+        log.info("ProjectController -> GetByID");
+        log.debug("ProjectController -> GetByID -> PARAM: ", id);
         return ResponseEntity.ok(projectServiceImpl.getById(id));
+    }
+
+    @GetMapping("/pagination")
+    @ApiOperation(value = "Get By Pagination Operation", response = ProjectDTO.class)
+    public ResponseEntity<TPage<ProjectDTO>> getAllPageable(Pageable pageable) {
+        return ResponseEntity.ok(projectServiceImpl.getAllPageable(pageable));
     }
 
     @PostMapping
