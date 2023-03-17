@@ -1,6 +1,7 @@
 package com.saybatan.issuemanagement.service.impl;
 
 import com.saybatan.issuemanagement.dto.IssueDTO;
+import com.saybatan.issuemanagement.dto.IssueUpdateDTO;
 import com.saybatan.issuemanagement.entity.Issue;
 import com.saybatan.issuemanagement.entity.IssueStatus;
 import com.saybatan.issuemanagement.entity.Project;
@@ -14,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,13 +40,13 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public IssueDTO save(IssueDTO issueDTO) {
+    public IssueDTO save(IssueUpdateDTO issueUpdateDTO) {
 
-        if (issueDTO.getDate() == null) {
+        if (issueUpdateDTO.getDate() == null) {
             throw new IllegalArgumentException("Issue date can not be null");
         }
 
-        Issue issue = modelMapper.map(issueDTO, Issue.class);
+        Issue issue = modelMapper.map(issueUpdateDTO, Issue.class);
         issueRepository.save(issue);
         return modelMapper.map(issue, IssueDTO.class);
     }
@@ -79,15 +81,15 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public IssueDTO update(Long id, IssueDTO issueDTO) {
+    public IssueDTO update(Long id, IssueUpdateDTO issueUpdateDTO) {
         Issue issue = issueRepository.getOne(id);
-        User user = userRepository.getOne(issueDTO.getAssignee().getId());
+        User user = userRepository.getOne(issueUpdateDTO.getAssigneeId());
         issue.setAssignee(user);
-        issue.setDate(issueDTO.getDate());
-        issue.setDescription(issueDTO.getDescription());
-        issue.setIssueStatus(issueDTO.getIssueStatus());
-        issue.setDetails(issueDTO.getDetails());
-        Project project = projectRepository.getOne(issueDTO.getProject().getId());
+        issue.setDate(issueUpdateDTO.getDate());
+        issue.setDescription(issueUpdateDTO.getDescription());
+        issue.setIssueStatus(issueUpdateDTO.getIssueStatus());
+        issue.setDetails(issueUpdateDTO.getDetails());
+        Project project = projectRepository.getOne(issueUpdateDTO.getProjectId());
         issue.setProject(project);
         issueRepository.save(issue);
         return modelMapper.map(issue,IssueDTO.class);

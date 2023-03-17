@@ -1,6 +1,7 @@
 package com.saybatan.issuemanagement.api;
 
 import com.saybatan.issuemanagement.dto.IssueDTO;
+import com.saybatan.issuemanagement.dto.IssueUpdateDTO;
 import com.saybatan.issuemanagement.service.impl.IssueServiceImpl;
 import com.saybatan.issuemanagement.util.ApiPaths;
 import io.swagger.annotations.Api;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -34,14 +36,14 @@ public class IssueController {
 
     @PostMapping
     @ApiOperation(value = "Create Operation", response = IssueDTO.class)
-    public ResponseEntity<IssueDTO> createIssue(@RequestBody IssueDTO issueDTO) {
-        return ResponseEntity.ok(issueService.save(issueDTO));
+    public ResponseEntity<IssueDTO> createIssue(@RequestBody IssueUpdateDTO issueUpdateDTO) {
+        return ResponseEntity.ok(issueService.save(issueUpdateDTO));
     }
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Update Operation", response = IssueDTO.class)
-    public ResponseEntity<IssueDTO> updateIssue(@PathVariable("id") Long id, @RequestBody IssueDTO issueDTO) {
-        return ResponseEntity.ok(issueService.update(id, issueDTO));
+    public ResponseEntity<IssueDTO> updateIssue(@PathVariable("id") Long id, @Valid @RequestBody IssueUpdateDTO issueUpdateDTO) {
+        return ResponseEntity.ok(issueService.update(id, issueUpdateDTO));
     }
 
     @DeleteMapping("/{id}")
