@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(ApiPaths.IssueCtrl.CTRL)
 @Api(value = ApiPaths.ProjectCtrl.CTRL)
@@ -24,6 +26,10 @@ public class IssueController {
     public ResponseEntity<IssueDTO> getById(@PathVariable("id") Long id) {
         IssueDTO issueDTO = issueService.getById(id);
         return ResponseEntity.ok(issueDTO);
+    }
+    @GetMapping
+    public ResponseEntity<List<IssueDTO>> getAll() {
+        return ResponseEntity.ok(issueService.getAll());
     }
 
     @PostMapping
