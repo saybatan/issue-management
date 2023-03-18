@@ -1,12 +1,13 @@
 package com.saybatan.issuemanagement.service;
 
 import com.saybatan.issuemanagement.dto.ProjectDTO;
+import com.saybatan.issuemanagement.dto.ProjectSaveDTO;
 import com.saybatan.issuemanagement.util.TPage;
 import org.springframework.data.domain.Pageable;
 
 public interface ProjectService {
 
-    ProjectDTO save(ProjectDTO projectDTO);
+    ProjectDTO save(ProjectSaveDTO projectSaveDTO);
 
     ProjectDTO getById(Long id);
 
@@ -16,8 +17,8 @@ public interface ProjectService {
 
     Boolean delete(ProjectDTO projectDTO);
 
-    ProjectDTO update(Long id, ProjectDTO projectDTO);
+    ProjectDTO update(Long id, ProjectSaveDTO projectSaveDTO);
 
-    void checkProjectCode(ProjectDTO projectDTO);
+    void checkProjectCode(ProjectSaveDTO projectSaveDTO);
 
 }

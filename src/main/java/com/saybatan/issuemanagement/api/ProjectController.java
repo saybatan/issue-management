@@ -2,6 +2,7 @@ package com.saybatan.issuemanagement.api;
 
 
 import com.saybatan.issuemanagement.dto.ProjectDTO;
+import com.saybatan.issuemanagement.dto.ProjectSaveDTO;
 import com.saybatan.issuemanagement.service.impl.ProjectServiceImpl;
 import com.saybatan.issuemanagement.util.ApiPaths;
 import com.saybatan.issuemanagement.util.TPage;
@@ -48,14 +49,14 @@ public class ProjectController {
 
     @PostMapping
     @ApiOperation(value = "Create Operation", response = ProjectDTO.class)
-    public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
-        return ResponseEntity.ok(projectServiceImpl.save(projectDTO));
+    public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectSaveDTO projectSaveDTO) {
+        return ResponseEntity.ok(projectServiceImpl.save(projectSaveDTO));
     }
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Update Operation", response = ProjectDTO.class)
-    public ResponseEntity<ProjectDTO> updateProject(@PathVariable("id") Long id, @Validated @RequestBody ProjectDTO projectDTO) {
-        return ResponseEntity.ok(projectServiceImpl.update(id, projectDTO));
+    public ResponseEntity<ProjectDTO> updateProject(@PathVariable("id") Long id, @Validated @RequestBody ProjectSaveDTO projectSaveDTO) {
+        return ResponseEntity.ok(projectServiceImpl.update(id, projectSaveDTO));
     }
 
     @DeleteMapping("/{id}")

@@ -1,6 +1,7 @@
 package com.saybatan.issuemanagement.service.impl;
 
 import com.saybatan.issuemanagement.dto.ProjectDTO;
+import com.saybatan.issuemanagement.dto.ProjectSaveDTO;
 import com.saybatan.issuemanagement.entity.Project;
 import com.saybatan.issuemanagement.repository.ProjectRepository;
 import com.saybatan.issuemanagement.service.ProjectService;
@@ -25,12 +26,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDTO save(ProjectDTO projectDTO) {
-        checkProjectCode(projectDTO);
-        Project project = modelMapper.map(projectDTO, Project.class);
+    public ProjectDTO save(ProjectSaveDTO projectSaveDTO) {
+        checkProjectCode(projectSaveDTO);
+        Project project = modelMapper.map(projectSaveDTO, Project.class);
         project = projectRepository.save(project);
-        projectDTO.setId(project.getId());
-        return projectDTO;
+        return modelMapper.map(project,ProjectDTO.class);
     }
 
     @Override
@@ -63,19 +63,19 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDTO update(Long id, ProjectDTO projectDTO) {
+    public ProjectDTO update(Long id, ProjectSaveDTO projectSaveDTO) {
 
         Project project = projectRepository.getOne(id);
         if (project == null) {
             throw new IllegalArgumentException("Project Does Not Exist. ID: " + id);
         }
 //        checkProjectCode(projectDTO);
-        Project projectCheck = projectRepository.getByProjectCodeAndIdNot(projectDTO.getProjectCode(),id);
+        Project projectCheck = projectRepository.getByProjectCodeAndIdNot(projectSaveDTO.getProjectCode(),id);
         if (projectCheck != null){
             throw new IllegalArgumentException("Project Code Already Exist");
         }
-        project.setProjectCode(projectDTO.getProjectCode());
-        project.setProjectName(projectDTO.getProjectName());
+        project.setProjectCode(projectSaveDTO.getProjectCode());
+        project.setProjectName(projectSaveDTO.getProjectName());
         projectRepository.save(project);
         return modelMapper.map(project, ProjectDTO.class);
     }
@@ -83,8 +83,8 @@ public class ProjectServiceImpl implements ProjectService {
 //    public Boolean deleteProject
 
     @Override
-    public void checkProjectCode(ProjectDTO projectDTO) {
-        Project projectCode = projectRepository.getByProjectCode(projectDTO.getProjectCode());
+    public void checkProjectCode(ProjectSaveDTO projectSaveDTO) {
+        Project projectCode = projectRepository.getByProjectCode(projectSaveDTO.getProjectCode());
         if (projectCode != null) {
             throw new IllegalArgumentException("Project Code Already Exist");
         }
