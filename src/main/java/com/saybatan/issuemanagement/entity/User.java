@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,7 @@ public class User extends BaseEntity{
     private String password;
     @Column(name = "name_surname", length = 200)
     private String nameSurname;
+    @Email
     @Column(name = "email", length = 100)
     private String email;
     @JoinColumn(name = "assignee_user_id")
