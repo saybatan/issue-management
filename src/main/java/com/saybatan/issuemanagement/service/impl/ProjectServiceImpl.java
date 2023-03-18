@@ -80,8 +80,6 @@ public class ProjectServiceImpl implements ProjectService {
         return modelMapper.map(project, ProjectDTO.class);
     }
 
-//    public Boolean deleteProject
-
     @Override
     public void checkProjectCode(ProjectSaveDTO projectSaveDTO) {
         Project projectCode = projectRepository.getByProjectCode(projectSaveDTO.getProjectCode());
