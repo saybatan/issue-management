@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -87,5 +88,10 @@ public class ProjectServiceImpl implements ProjectService {
         if (projectCode != null) {
             throw new IllegalArgumentException("Project Code Already Exist");
         }
+    }
+
+    public List<ProjectDTO> getAll() {
+        List<Project> projectList = projectRepository.findAll();
+        return Arrays.asList(modelMapper.map(projectList,ProjectDTO[].class));
     }
 }

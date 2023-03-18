@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(ApiPaths.ProjectCtrl.CTRL)
 @Api(value = ApiPaths.ProjectCtrl.CTRL)
@@ -30,6 +32,12 @@ public class ProjectController {
         log.info("ProjectController -> GetByID");
         log.debug("ProjectController -> GetByID -> PARAM: ", id);
         return ResponseEntity.ok(projectServiceImpl.getById(id));
+    }
+
+    @GetMapping
+    @ApiOperation(value = "Get All Operation", response = ProjectDTO.class)
+    public ResponseEntity<List<ProjectDTO>> getAll() {
+        return ResponseEntity.ok(projectServiceImpl.getAll());
     }
 
     @GetMapping("/pagination")
