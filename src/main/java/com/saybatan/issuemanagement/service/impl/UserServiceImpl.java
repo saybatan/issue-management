@@ -1,5 +1,6 @@
 package com.saybatan.issuemanagement.service.impl;
 
+import com.saybatan.issuemanagement.dto.PasswordChangeDTO;
 import com.saybatan.issuemanagement.dto.UserCreateDTO;
 import com.saybatan.issuemanagement.dto.UserDTO;
 import com.saybatan.issuemanagement.dto.UserSaveDTO;
@@ -74,10 +75,24 @@ public class UserServiceImpl implements UserService {
         return Arrays.asList(modelMapper.map(users,UserDTO[].class));
     }
 
-
-
     public Boolean deleteById(Long id) {
         userRepository.deleteById(id);
+        return true;
+    }
+
+    public Boolean changePassword(Long userId, PasswordChangeDTO passwordChangeDTO) throws Exception {
+        User user = userRepository.getOne(userId);
+        if (!user.getPassword().equals(passwordChangeDTO.getOldPassword())) {
+            throw new Exception("Eski şifre hatalı!");
+        }
+        if (user.getPassword().equals(passwordChangeDTO.getNewPassword())) {
+            throw new Exception("Yeni şifre eskisiyle aynı olamaz");
+        }
+        if (!passwordChangeDTO.getNewPassword().equals(passwordChangeDTO.getNewPasswordAgain())) {
+            throw new Exception("Yeni şifre uyumsuz!");
+        }
+        user.setPassword(passwordChangeDTO.getNewPassword());
+        userRepository.save(user);
         return true;
     }
 }

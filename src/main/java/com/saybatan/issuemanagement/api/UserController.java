@@ -56,5 +56,12 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteById(id));
     }
 
+    @PutMapping("/pwd/{userId}")
+    @ApiOperation(value = "Password Operation", response = Boolean.class)
+    public ResponseEntity<Boolean> updatePassword(@PathVariable("userId") Long userId, @RequestBody PasswordChangeDTO passwordChangeDTO) throws Exception {
+        userService.changePassword(userId, passwordChangeDTO);
+        return ResponseEntity.ok(true);
+    }
+
 
 }
