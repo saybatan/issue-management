@@ -1,2 +1,4 @@
 # issue-management
- Java - Angular Project
+* Java Spring Project
+* Added PostgreSQL dependency
+* Used Swagger UI to test APIs
