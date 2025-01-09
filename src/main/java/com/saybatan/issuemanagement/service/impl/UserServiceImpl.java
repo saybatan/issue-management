@@ -17,15 +17,6 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Override
-    public UserDTO update(Long id, UserSaveDTO userSaveDTO) {
-        User user = userRepository.getOne(id);
-        user.setNameSurname(userSaveDTO.getNameSurname());
-        user.setEmail(userSaveDTO.getEmail());
-        user.setPassword(userSaveDTO.getPassword());
-        user = userRepository.save(user);
-        return modelMapper.map(user, UserDTO.class);
-    }
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
@@ -35,6 +26,15 @@ public class UserServiceImpl implements UserService {
         this.modelMapper = modelMapper;
     }
 
+    @Override
+    public UserDTO update(Long id, UserSaveDTO userSaveDTO) {
+        User user = userRepository.getOne(id);
+        user.setNameSurname(userSaveDTO.getNameSurname());
+        user.setEmail(userSaveDTO.getEmail());
+        user.setPassword(userSaveDTO.getPassword());
+        user = userRepository.save(user);
+        return modelMapper.map(user, UserDTO.class);
+    }
 
     @Override
     public UserDTO save(UserCreateDTO userCreateDTO) throws Exception {
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     public List<UserDTO> getAll() {
         List<User> users = userRepository.findAll();
-        return Arrays.asList(modelMapper.map(users,UserDTO[].class));
+        return Arrays.asList(modelMapper.map(users, UserDTO[].class));
     }
 
     public Boolean deleteById(Long id) {
